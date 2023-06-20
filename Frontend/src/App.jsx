@@ -8,6 +8,8 @@ import {
   Routes,
   Route
 } from 'react-router-dom';
+import Empleado from './pages/empleados/Empleado';
+import Vehiculos from './pages/empleados/Vehiculos';
 
 function App() {
   return (
@@ -18,6 +20,8 @@ function App() {
         <Route path="/forgotpassword" element={<ForgotPassword/>}/>
         <Route path="/register" element={<Register/>}/>
         <Route path="/parentesco" element={<Parentesco/>}/>
+        <Route path="/empleados" element={<Empleado/>}/>
+        <Route path="/vehiculos" element={<Vehiculos/>}/>
       </Routes>
     </BrowserRouter>
   );
