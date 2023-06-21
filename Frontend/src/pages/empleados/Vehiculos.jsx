@@ -1,12 +1,10 @@
-import PlantillaPrincipal from "../layout/PlantillaPrincipal"
+import Layout from "../../components/Layout"
 
 function Vehiculos() {
     return (
-        <PlantillaPrincipal>
-            <div>
-                Vihiculos
-            </div>
-        </PlantillaPrincipal>
+        <Layout>
+            <h1>Vehiculos</h1>
+        </Layout>
     )
 }
 

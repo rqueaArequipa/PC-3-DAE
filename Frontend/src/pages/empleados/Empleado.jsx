@@ -1,15 +1,14 @@
 import React from 'react'
-import PlantillaPrincipal from '../layout/PlantillaPrincipal'
+import Layout from '../../components/Layout'
 
 function Empleado(){
 
     function list(){
     }
     return (
-        <PlantillaPrincipal>
-            <div>Empleados</div>
-            <div></div>
-        </PlantillaPrincipal>
+        <Layout>
+            <h1>Empleados</h1>
+        </Layout>
     )
 }
 

@@ -1,8 +1,9 @@
-import PlantillaPrincipal from "./layout/PlantillaPrincipal";
+import Layout from "../components/Layout";
+
 
 function Index() {
     return (
-        <PlantillaPrincipal>
+        <Layout>
             <div className="container-fluid px-4">
                 <h1 className="mt-4">Static Navigation</h1>
                 <ol className="breadcrumb mb-4">
@@ -23,7 +24,7 @@ function Index() {
 
                 <div className="card mb-4"><div className="card-body">When scrolling, the navigation stays at the top of the page. This is the end of the static navigation demo.</div></div>
             </div>
-        </PlantillaPrincipal>
+        </Layout>
     )
 }
 
