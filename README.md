@@ -6,19 +6,11 @@ Este repositorio contiene una modificación del formulario de registro para nuev
 
 ## Características
 
-- Mejora de la interfaz de usuario para una mejor usabilidad.
-- Adición de campos adicionales para recopilar información importante.
-- Validación de datos para garantizar que se introduzcan valores correctos.
-- Ajustes en el flujo del formulario para una experiencia de registro más fluida.
-
-## Capturas de pantalla
-
-![Captura de pantalla 1](/screenshots/screenshot1.png)
-![Captura de pantalla 2](/screenshots/screenshot2.png)
+- Arreglo de interfaz en formulario de usuario.
 
 ## Instrucciones de Uso
 
 1. Clona este repositorio en tu entorno local.
 
    ```shell
-  https://github.com/rqueaArequipa/PC-3-DAE/tree/nueva_rama
+   (https://github.com/rqueaArequipa/PC-3-DAE/tree/nueva_rama)
