@@ -9,5 +9,5 @@ router.register('empleado', TblEmpleadoViewSet, 'empleado')
 router.register('cargo', TblCargoViewSet, 'cargo')
 router.register('vehiculo', TblVehiculoViewSet, 'vehiculo')
 urlpatterns = [
-    path('',include(router.urls))
+    path('api/',include(router.urls))
 ]

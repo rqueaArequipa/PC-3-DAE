@@ -10,6 +10,7 @@ import {
 } from 'react-router-dom';
 import Empleado from './pages/empleados/Empleado';
 import Vehiculos from './pages/empleados/Vehiculos';
+import AgregarEmpleado from './pages/empleados/AgregarEmpleado';
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
         <Route path="/parentesco" element={<Parentesco/>}/>
         <Route path="/empleados" element={<Empleado/>}/>
         <Route path="/vehiculos" element={<Vehiculos/>}/>
+        <Route path='/agregar-empleado' element={<AgregarEmpleado/>}/>
       </Routes>
     </BrowserRouter>
   );

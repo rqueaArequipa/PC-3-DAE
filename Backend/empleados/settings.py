@@ -83,7 +83,7 @@ DATABASES = {
     'ENGINE': 'django.db.backends.mysql',
     'NAME': 'db_movilidad',
     'USER': 'root',
-    'PASSWORD': 'T3csup1234',
+    'PASSWORD': 'T3csup5488',
     'HOST': '127.0.0.1',
     'PORT': '3306',
     }

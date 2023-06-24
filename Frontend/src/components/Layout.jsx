@@ -13,9 +13,7 @@ function Layout({ children }) {
                     <main>
                         {children}
                     </main>
-                    <footer className="py-4 bg-light mt-auto">
                         <Footer/>
-                    </footer>
                 </div>
             </div>
         </>
