@@ -133,7 +133,7 @@ function AgregarEmpleado({ onValueChange }) {
                         value={cargoId}
                         onChange={(e) => setCargoId(e.target.value)}
                     >
-                        <option value="">Seleccionar Vehiculo Placa:</option>
+                        <option value="">Seleccionar un cargo:</option>
                         {Array.isArray(cargos) &&
                             cargos.map((option) => (
                                 <option key={option.cargo_id} value={option.cargo_id}>
@@ -144,13 +144,13 @@ function AgregarEmpleado({ onValueChange }) {
                 </Form.Group>
 
                 <Form.Group className="mb-3">
-                    <Form.Label>Seleccione una opción:</Form.Label>
+                    <Form.Label>Seleccione el vehiculo:</Form.Label>
                     <Form.Control
                         as="select"
                         value={vehiculoId}
                         onChange={(e) => setVehiculoId(e.target.value)}
                     >
-                        <option value="">Seleccionar opción</option>
+                        <option value="">Seleccionar una placa de vehiculo</option>
                         {Array.isArray(vehiculos) &&
                             vehiculos.map((option) => (
                                 <option key={option.vehiculo_id} value={option.vehiculo_id}>
