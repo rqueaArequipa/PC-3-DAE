@@ -21,4 +21,4 @@ Este repositorio contiene una modificación del formulario de registro para nuev
 1. Clona este repositorio en tu entorno local.
 
    ```shell
-   git clone https://github.com/tu-usuario/nombre-repositorio.git
+  https://github.com/rqueaArequipa/PC-3-DAE/tree/nueva_rama
