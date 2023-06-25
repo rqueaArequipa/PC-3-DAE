@@ -1,3 +1,4 @@
+import { Container } from "react-bootstrap"
 import Footer from "./Footer"
 import NavBar from "./NavBar"
 import SideBar from "./SideBar"

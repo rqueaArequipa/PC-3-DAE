@@ -4,24 +4,19 @@ import './styleEmpleados.css'
 import TablaEmpleado from "./tablas/TablaEmpleado";
 import axios from "axios";
 import { Row, Col, Container, Form, InputGroup, FormControl, Button } from 'react-bootstrap';
-import AgregarEmpleado from "./AgregarEmpleado";
 import { Breadcrumb } from 'react-bootstrap';
+import AgregarEditarEmpleadoForm from "./AgregarEmpleado";
 
 function Empleado() {
-
-    let [empleados, setEmpleados] = useState([])
-    let [pos, setPos] = useState("not")
-    let [searchTerm, setSearchTerm] = useState('');
-    let [searchCriteria, setSearchCriteria] = useState('nombre');
-
-    const handleSetValue = (newValue) => {
-        setPos(newValue);
-    };
+    const [empleados, setEmpleados] = useState([])
+    const [searchTerm, setSearchTerm] = useState('');
+    const [searchCriteria, setSearchCriteria] = useState('nombre');
+    const [empleadoSeleccionado, setEmpleadoSeleccionado] = useState(null);
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                let responseEmpl = await axios.get('http://127.0.0.1:8000/api/empleado/')
+                const responseEmpl = await axios.get('http://127.0.0.1:8000/api/empleado/')
                 setEmpleados(responseEmpl.data)
                 console.log(responseEmpl.data)
             } catch (error) {
@@ -29,32 +24,24 @@ function Empleado() {
             }
         }
         fetchData()
-        setPos("Not")
-    }, [pos])
+    }, [])
 
 
-    const handleSearchCriteriaChange = (e) => {
-        setSearchCriteria(e.target.value);
-    };
-
-    const handleSearchTermChange = (e) => {
-        setSearchTerm(e.target.value);
-    };
-
+    {/* Search por nombre, apellido, cargo, placa de vehiculo */}
+    const handleSearchCriteriaChange = (e) => {setSearchCriteria(e.target.value);};
+    const handleSearchTermChange = (e) => {setSearchTerm(e.target.value);};
     const filteredEmpleados = empleados.filter((empleado) => {
         if (searchCriteria === 'nombre') {
             return empleado.empleado_nombre.toLowerCase().includes(searchTerm.toLowerCase());
         } else if (searchCriteria === 'apellidos') {
-            return empleado.empleado_apellido.toLowerCase().includes(searchTerm.toLowerCase());
-        } else if (searchCriteria === 'cargo') {
-            return empleado.cargo.toLowerCase().includes(searchTerm.toLowerCase());
-        } else if (searchCriteria === 'placaVehiculo') {
-            return empleado.tbl_vehiculo_vehiculo.toLowerCase().includes(searchTerm.toLowerCase());
+            return empleado.empleado_apellido.toLowerCase().includes(searchTerm.toLowerCase())
         }
     });
+    {/* endSearch */}
 
+    {/* Delete */}
     function eliminarEmpleado(cod) {
-        let rpta = window.confirm("desea eliminar");
+        const rpta = window.confirm("desea eliminar");
         if (rpta) {
             axios.delete('http://127.0.0.1:8000/api/empleado/' + cod)
                 .then(response => {
@@ -63,10 +50,45 @@ function Empleado() {
                 })
         }
     }
+    {/*EndDelete */}
+
+    {/* setId */}
+    const editarEmpleado = (empleadoId) => {
+        const empleado = empleados.find((empleado) => empleado.empleado_id === empleadoId);
+        setEmpleadoSeleccionado(empleado);
+    };
+    {/*EndSetID */}
+
+    const actualizarEmpleado = (empleadoId, datos) => {
+        if (empleadoId) {
+            axios
+                .put(`http://127.0.0.1:8000/api/empleado/${empleadoId}/`, datos)
+                .then((response) => {
+                    const empleadoIndex = empleados.findIndex((empleado) => empleado.empleado_id === empleadoId);
+                    const updatedEmpleados = [...empleados];
+                    updatedEmpleados[empleadoIndex] = response.data;
+                    setEmpleados(updatedEmpleados);
+                    setEmpleadoSeleccionado(null);
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+        } else {
+            axios
+                .post("http://127.0.0.1:8000/api/empleado/", datos)
+                .then((response) => {
+                    setEmpleados([...empleados, response.data]);
+                    setEmpleadoSeleccionado(null);
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+        }
+    };
 
     return (
         <Layout>
-            <div className="pagetitle" style={{ marginTop: '20px', marginLeft: '20px' }}>
+            <div>
                 <h1>Tabla Empleados</h1>
                 <Breadcrumb>
                     <Breadcrumb.Item href="/">Dashboard</Breadcrumb.Item>
@@ -78,8 +100,6 @@ function Empleado() {
                         <Form.Control as="select" value={searchCriteria} onChange={handleSearchCriteriaChange}>
                             <option value="nombre">Nombre</option>
                             <option value="apellidos">Apellidos</option>
-                            <option value="cargo">Cargo</option>
-                            <option value="placaVehiculo">Placa Vehículo</option>
                         </Form.Control>
                     </Form.Group>
 
@@ -91,13 +111,13 @@ function Empleado() {
                     </Form.Group>
                 </Col>
             </div>
+
+            {/*  Components ListEmpleado y AddEmpleado */}
             <Row className="justify-content-center">
-                <Col md={8}>
-                    <TablaEmpleado listaEmpleados={filteredEmpleados} eliminarEmpleado={eliminarEmpleado} />
-                </Col>
-                <Col md={4}>
-                    <AgregarEmpleado onValueChange={handleSetValue} />
-                </Col>
+                <TablaEmpleado listaempleados={filteredEmpleados} eliminarEmpleado={eliminarEmpleado} editarEmpleado={editarEmpleado} />
+                <AgregarEditarEmpleadoForm empleado={empleadoSeleccionado}
+                    onSubmit={actualizarEmpleado}
+                    onCancel={() => setEmpleadoSeleccionado(null)} />
             </Row>
         </Layout>
     );

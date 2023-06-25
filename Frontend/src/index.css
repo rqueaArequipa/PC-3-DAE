@@ -11699,3 +11699,8 @@ body {
   font-size: 0.75rem;
   border-radius: 0.25rem !important;
 }
+
+main{
+  background-image: url(https://image.freepik.com/foto-gratis/fondo-de-pantalla-gris-con-textura_1194-7177.jpg);
+  padding: 20px;
+}
