@@ -1,29 +1,63 @@
 import Layout from "../components/Layout";
+import { Container, Row, Col, Button, Card } from 'react-bootstrap';
+
 
 
 function Index() {
     return (
         <Layout>
-            <div className="container-fluid px-4">
-                <h1 className="mt-4">Static Navigation</h1>
-                <ol className="breadcrumb mb-4">
-                    <li className="breadcrumb-item"><a href="/">Dashboard</a></li>
-                    <li className="breadcrumb-item active">Static Navigation</li>
-                </ol>
-                <div className="card mb-4">
-                    <div className="card-body">
-                        <p className="mb-0">
-                            This page is an example of using static navigation. By removing the
-                            <code>.sb-nav-fixed</code>
-                            class from the
-                            <code>body</code>
-                            , the top navigation and side navigation will become static on scroll. Scroll down this page to see an example.
+            <Container className="py-5">
+                <Row className="text-center">
+                    <Col>
+                        <h1 className="mb-4">Bienvenido a Movilidad Escolar</h1>
+                        <p className="lead">
+                            La solución para el transporte seguro y confiable de estudiantes.
                         </p>
-                    </div>
-                </div>
+                        <Button variant="primary" size="lg" className="mt-4">
+                            Regístrate ahora
+                        </Button>
+                    </Col>
+                </Row>
 
-                <div className="card mb-4"><div className="card-body">When scrolling, the navigation stays at the top of the page. This is the end of the static navigation demo.</div></div>
-            </div>
+                <Row className="mt-5">
+                    <Col md={4}>
+                        <Card>
+                            <Card.Body>
+                                <Card.Title>Transporte confiable</Card.Title>
+                                <Card.Text>
+                                    Nuestro servicio de movilidad escolar cuenta con conductores
+                                    capacitados y vehículos seguros para garantizar la tranquilidad
+                                    de los padres y la comodidad de los estudiantes.
+                                </Card.Text>
+                            </Card.Body>
+                        </Card>
+                    </Col>
+                    <Col md={4}>
+                        <Card>
+                            <Card.Body>
+                                <Card.Title>Rastreo en tiempo real</Card.Title>
+                                <Card.Text>
+                                    Utilizamos tecnología GPS para que los padres puedan monitorear
+                                    la ubicación del transporte escolar en tiempo real y tener
+                                    tranquilidad sobre el paradero de sus hijos.
+                                </Card.Text>
+                            </Card.Body>
+                        </Card>
+                    </Col>
+                    <Col md={4}>
+                        <Card>
+                            <Card.Body>
+                                <Card.Title>Comunicación directa</Card.Title>
+                                <Card.Text>
+                                    Facilitamos la comunicación directa entre los padres, los
+                                    conductores y el personal escolar para una coordinación
+                                    eficiente y rápida en caso de cualquier eventualidad.
+                                </Card.Text>
+                            </Card.Body>
+                        </Card>
+                    </Col>
+                </Row>
+            </Container>
         </Layout>
     )
 }

@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
-import { Col, Form, Button, Alert} from "react-bootstrap";
+import { Col, Form, Button, Alert, InputGroup } from "react-bootstrap";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrash, faEdit, faPhone, faUserTag, faDollarSign } from '@fortawesome/free-solid-svg-icons';
 
 function AgregarEditarCargoForm({ cargo, onSubmit, onCancel }) {
     const [nombreCargo, setNombreCargo] = useState("")
@@ -46,22 +48,32 @@ function AgregarEditarCargoForm({ cargo, onSubmit, onCancel }) {
             <Form onSubmit={handleSubmit}>
                 <Form.Group controlId="formName" className="mb-3">
                     <Form.Label>Nombre Cargo:</Form.Label>
-                    <Form.Control
-                        type="text"
-                        placeholder="Ingrese un cargo"
-                        value={nombreCargo}
-                        onChange={(e) => setNombreCargo(e.target.value)}
-                    />
+                    <InputGroup>
+                        <InputGroup.Text>
+                            <FontAwesomeIcon icon={faUserTag} />
+                        </InputGroup.Text>
+                        <Form.Control
+                            type="text"
+                            placeholder="Ingrese un cargo"
+                            value={nombreCargo}
+                            onChange={(e) => setNombreCargo(e.target.value)}
+                        />
+                    </InputGroup>
                 </Form.Group>
 
                 <Form.Group controlId="formLastname" className="mb-3">
                     <Form.Label>Sueldo:</Form.Label>
-                    <Form.Control
-                        type="number"
-                        placeholder="Ingrese el sueldo"
-                        value={sueldo}
-                        onChange={(e) => setSueldo(e.target.value)}
-                    />
+                    <InputGroup>
+                        <InputGroup.Text>
+                            <FontAwesomeIcon icon={faDollarSign} />
+                        </InputGroup.Text>
+                        <Form.Control
+                            type="number"
+                            placeholder="Ingrese el sueldo"
+                            value={sueldo}
+                            onChange={(e) => setSueldo(e.target.value)}
+                        />
+                    </InputGroup>
                 </Form.Group>
                 <Form.Group className="mb-3">
                     <div className="text-center">

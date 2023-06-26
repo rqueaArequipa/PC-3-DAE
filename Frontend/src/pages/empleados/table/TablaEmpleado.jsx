@@ -27,7 +27,7 @@ function TablaEmpleado({listaempleados, eliminarEmpleado, editarEmpleado }) {
 
     return (
         <Col md={8}>
-            <Table striped bordered hover>
+            <Table striped bordered hover style={{backgroundColor: '#fff'}}>
                 <thead>
                     <tr>
                         <th className="text-center">#</th>

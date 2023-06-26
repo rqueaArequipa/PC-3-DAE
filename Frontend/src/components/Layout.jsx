@@ -11,9 +11,11 @@ function Layout({ children }) {
                     <SideBar />
                     
                 <div id="layoutSidenav_content">
+                    <div className="layoutSidenav card">
                     <main>
                         {children}
                     </main>
+                    </div>
                         <Footer/>
                 </div>
             </div>

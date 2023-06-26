@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { Form, Button, Container, Alert, Col } from "react-bootstrap";
+import { Form, Button, Container, Alert, Col, InputGroup } from "react-bootstrap";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrash, faEdit, faPhone, faUser, faCar, faBriefcase  } from '@fortawesome/free-solid-svg-icons';
 
 function AgregarEditarEmpleadoForm({ empleado, onSubmit, onCancel }) {
     const [nombre, setNombre] = useState("");
@@ -78,60 +80,85 @@ function AgregarEditarEmpleadoForm({ empleado, onSubmit, onCancel }) {
                 <h2>{empleado ? "Editar Empleado" : "Agregar Empleado"}</h2>
                 {showError && <Alert variant="danger">Por favor rellene todos los campos</Alert>}
                 <Form onSubmit={handleSubmit}>
-                    <Form.Group controlId="formName">
+                    <Form.Group controlId="formName" className="mb-3">
                         <Form.Label>Nombres:</Form.Label>
-                        <Form.Control
-                            type="text"
-                            placeholder="Ingrese su nombre"
-                            value={nombre}
-                            onChange={(e) => setNombre(e.target.value)}
-                        />
+                        <InputGroup>
+                            <InputGroup.Text>
+                                <FontAwesomeIcon icon={faUser} />
+                            </InputGroup.Text>
+                            <Form.Control
+                                type="text"
+                                placeholder="Ingrese su nombre"
+                                value={nombre}
+                                onChange={(e) => setNombre(e.target.value)}
+                            />
+                        </InputGroup>
                     </Form.Group>
 
-                    <Form.Group controlId="formLastname">
+                    <Form.Group controlId="formLastname" className="mb-3">
                         <Form.Label>Apellidos:</Form.Label>
-                        <Form.Control
-                            type="text"
-                            placeholder="Ingresa sus apellidos"
-                            value={apellido}
-                            onChange={(e) => setApellido(e.target.value)}
-                        />
+                        <InputGroup>
+                            <InputGroup.Text>
+                                <FontAwesomeIcon icon={faUser} />
+                            </InputGroup.Text>
+                            <Form.Control
+                                type="text"
+                                placeholder="Ingresa sus apellidos"
+                                value={apellido}
+                                onChange={(e) => setApellido(e.target.value)}
+                            />
+                        </InputGroup>
                     </Form.Group>
 
-                    <Form.Group controlId="formName">
-                        <Form.Label>Telefono: </Form.Label>
-                        <Form.Control
-                            type="text"
-                            placeholder="Ingrese su telefono"
-                            value={telefono}
-                            onChange={(e) => setTelefono(e.target.value)}
-                        />
+                    <Form.Group controlId="formName" className="mb-3">
+                        <Form.Label>Telefono:</Form.Label>
+                        <InputGroup>
+                            <InputGroup.Text>
+                                <FontAwesomeIcon icon={faPhone} />
+                            </InputGroup.Text>
+                            <Form.Control
+                                type="text"
+                                placeholder="Ingrese su telefono"
+                                value={telefono}
+                                onChange={(e) => setTelefono(e.target.value)}
+                            />
+                        </InputGroup>
                     </Form.Group>
 
                     <Form.Group className="mb-3">
                         <Form.Label>Seleccionar el Cargo:</Form.Label>
-                        <Form.Control as="select" value={cargoId} onChange={(e) => setCargoId(e.target.value)}>
-                            <option value="">Seleccionar un cargo</option>
-                            {Array.isArray(cargos) &&
-                                cargos.map((option) => (
-                                    <option key={option.cargo_id} value={option.cargo_id}>
-                                        {option.cargo_nombre}
-                                    </option>
-                                ))}
-                        </Form.Control>
+                        <InputGroup>
+                            <InputGroup.Text>
+                                <FontAwesomeIcon icon={faBriefcase} />
+                            </InputGroup.Text>
+                            <Form.Control as="select" value={cargoId} onChange={(e) => setCargoId(e.target.value)}>
+                                <option value="">Seleccionar un cargo</option>
+                                {Array.isArray(cargos) &&
+                                    cargos.map((option) => (
+                                        <option key={option.cargo_id} value={option.cargo_id}>
+                                            {option.cargo_nombre}
+                                        </option>
+                                    ))}
+                            </Form.Control>
+                        </InputGroup>
                     </Form.Group>
 
                     <Form.Group className="mb-3">
                         <Form.Label>Seleccione el vehiculo:</Form.Label>
-                        <Form.Control as="select" value={vehiculoId} onChange={(e) => setVehiculoId(e.target.value)}>
-                            <option value="">Seleccionar una placa de vehiculo</option>
-                            {Array.isArray(vehiculos) &&
-                                vehiculos.map((option) => (
-                                    <option key={option.vehiculo_id} value={option.vehiculo_id}>
-                                        {option.vehiculo_placa}
-                                    </option>
-                                ))}
-                        </Form.Control>
+                        <InputGroup>
+                            <InputGroup.Text>
+                                <FontAwesomeIcon icon={faCar} />
+                            </InputGroup.Text>
+                            <Form.Control as="select" value={vehiculoId} onChange={(e) => setVehiculoId(e.target.value)}>
+                                <option value="">Seleccionar una placa de vehiculo</option>
+                                {Array.isArray(vehiculos) &&
+                                    vehiculos.map((option) => (
+                                        <option key={option.vehiculo_id} value={option.vehiculo_id}>
+                                            {option.vehiculo_marca + ' - ' + option.vehiculo_placa}
+                                        </option>
+                                    ))}
+                            </Form.Control>
+                        </InputGroup>
                     </Form.Group>
                     <Form.Group>
                         <div className="text-center">
