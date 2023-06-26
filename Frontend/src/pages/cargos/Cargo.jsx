@@ -4,6 +4,7 @@ import TablaCargos from "./table/TablaCargos"
 import { useEffect, useState } from "react"
 import axios from "axios"
 import AgregarEditarCargoForm from "./form/AgregarCargos"
+import LoadingPage from "../LoadingPage"
 
 function Cargos() {
 
@@ -11,6 +12,7 @@ function Cargos() {
     const [cargos, setCargos] = useState([])
     const [cargoSeleccionado, setCargoSeleccionado] = useState(null);
     const [error, setError] = useState(null);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -18,12 +20,14 @@ function Cargos() {
                 const responseCargos = await axios.get(apiUrlCargos)
                 setCargos(responseCargos.data)
                 console.log(responseCargos.data)
+                setLoading(false)
             } catch (error) {
                 console.log(error)
+                setLoading(true)
             }
         }
         fetchData()
-    }, [])
+    }, [loading])
     function eliminarCargo(cod) {
 
         try {
@@ -79,6 +83,12 @@ function Cargos() {
     const MessageError = (MessagError) => {
         setError(MessagError)
     };
+
+    if (loading){
+        return (
+            <LoadingPage/>
+        )
+    }
 
     return (
         <Layout>

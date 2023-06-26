@@ -6,6 +6,7 @@ import axios from "axios";
 import { Row, Col, Container, Form, InputGroup, FormControl, Button } from 'react-bootstrap';
 import { Breadcrumb } from 'react-bootstrap';
 import AgregarEditarEmpleadoForm from "./form/AgregarEmpleado";
+import LoadingPage from "../LoadingPage";
 
 function Empleado() {
     const [empleados, setEmpleados] = useState([])
@@ -13,6 +14,7 @@ function Empleado() {
     const [searchCriteria, setSearchCriteria] = useState('nombre');
     const [empleadoSeleccionado, setEmpleadoSeleccionado] = useState(null);
     const apiUrlEmpleado = 'http://127.0.0.1:8000/api/empleado/'
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -20,8 +22,10 @@ function Empleado() {
                 const responseEmpl = await axios.get(apiUrlEmpleado)
                 setEmpleados(responseEmpl.data)
                 console.log(responseEmpl.data)
+                setLoading(false)
             } catch (error) {
                 console.log(error)
+                setLoading(true)
             }
         }
         fetchData()
@@ -85,6 +89,12 @@ function Empleado() {
                 });
         }
     };
+
+    if(loading) {
+        return (
+            <LoadingPage/>
+        )
+    }
 
     return (
         <Layout>

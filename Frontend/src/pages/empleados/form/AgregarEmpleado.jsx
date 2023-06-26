@@ -12,6 +12,7 @@ function AgregarEditarEmpleadoForm({ empleado, onSubmit, onCancel }) {
     const [vehiculoId, setVehiculoId] = useState(0)
     const [showError, setShowError] = useState(false);
 
+
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -21,6 +22,7 @@ function AgregarEditarEmpleadoForm({ empleado, onSubmit, onCancel }) {
                 setVehiculos(responseVehiculos.data);
             } catch (error) {
                 console.log(error);
+
             }
         };
 
