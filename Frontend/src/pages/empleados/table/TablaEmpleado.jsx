@@ -19,6 +19,7 @@ function TablaEmpleado({listaempleados, eliminarEmpleado, editarEmpleado }) {
                     })
                 );
                 setEmpleados(empleadosWithRelationalData);
+                console.log(empleadosWithRelationalData)
             };
 
             fetchRelationalData();

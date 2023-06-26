@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { Form, Button, Container, Alert, Col} from "react-bootstrap";
+import { Form, Button, Container, Alert, Col } from "react-bootstrap";
 
 function AgregarEditarEmpleadoForm({ empleado, onSubmit, onCancel }) {
     const [nombre, setNombre] = useState("");
@@ -51,95 +51,98 @@ function AgregarEditarEmpleadoForm({ empleado, onSubmit, onCancel }) {
             tbl_vehiculo_vehiculo: vehiculoId
         };
 
-        setNombre('');
-        setApellido('');
-        setTelefono('');
+        setNombre('')
+        setApellido('')
+        setTelefono('')
         setCargoId(0)
         setVehiculoId(0)
+        setShowError(false)
         onSubmit(empleado ? empleado.empleado_id : null, datos);
     };
 
     const handleFormCancel = () => {
-        setNombre('');
-        setApellido('');
-        setTelefono('');
+        setNombre('')
+        setApellido('')
+        setTelefono('')
         setCargoId(0)
         setVehiculoId(0)
+        setShowError(false)
         onCancel();
     };
 
     return (
         <Col md={4}>
-            <h2>{empleado ? "Editar Empleado" : "Agregar Empleado"}</h2>
-            <Form onSubmit={handleSubmit}>
-                <Form.Group controlId="formName">
-                    <Form.Label>Nombres:</Form.Label>
-                    <Form.Control
-                        type="text"
-                        placeholder="Ingrese su nombre"
-                        value={nombre}
-                        onChange={(e) => setNombre(e.target.value)}
-                    />
-                </Form.Group>
+            <Container>
+                <h2>{empleado ? "Editar Empleado" : "Agregar Empleado"}</h2>
+                {showError && <Alert variant="danger">Por favor rellene todos los campos</Alert>}
+                <Form onSubmit={handleSubmit}>
+                    <Form.Group controlId="formName">
+                        <Form.Label>Nombres:</Form.Label>
+                        <Form.Control
+                            type="text"
+                            placeholder="Ingrese su nombre"
+                            value={nombre}
+                            onChange={(e) => setNombre(e.target.value)}
+                        />
+                    </Form.Group>
 
-                <Form.Group controlId="formLastname">
-                    <Form.Label>Apellidos:</Form.Label>
-                    <Form.Control
-                        type="text"
-                        placeholder="Ingresa sus apellidos"
-                        value={apellido}
-                        onChange={(e) => setApellido(e.target.value)}
-                    />
-                </Form.Group>
+                    <Form.Group controlId="formLastname">
+                        <Form.Label>Apellidos:</Form.Label>
+                        <Form.Control
+                            type="text"
+                            placeholder="Ingresa sus apellidos"
+                            value={apellido}
+                            onChange={(e) => setApellido(e.target.value)}
+                        />
+                    </Form.Group>
 
-                <Form.Group controlId="formName">
-                    <Form.Label>Telefono: </Form.Label>
-                    <Form.Control
-                        type="text"
-                        placeholder="Ingrese su telefono"
-                        value={telefono}
-                        onChange={(e) => setTelefono(e.target.value)}
-                    />
-                </Form.Group>
+                    <Form.Group controlId="formName">
+                        <Form.Label>Telefono: </Form.Label>
+                        <Form.Control
+                            type="text"
+                            placeholder="Ingrese su telefono"
+                            value={telefono}
+                            onChange={(e) => setTelefono(e.target.value)}
+                        />
+                    </Form.Group>
 
-                <Form.Group className="mb-3">
-                    <Form.Label>Seleccionar el Cargo:</Form.Label>
-                    <Form.Control as="select" value={cargoId} onChange={(e) => setCargoId(e.target.value)}>
-                        <option value="">Seleccionar un cargo:</option>
-                        {Array.isArray(cargos) &&
-                            cargos.map((option) => (
-                                <option key={option.cargo_id} value={option.cargo_id}>
-                                    {option.cargo_nombre}
-                                </option>
-                            ))}
-                    </Form.Control>
-                </Form.Group>
+                    <Form.Group className="mb-3">
+                        <Form.Label>Seleccionar el Cargo:</Form.Label>
+                        <Form.Control as="select" value={cargoId} onChange={(e) => setCargoId(e.target.value)}>
+                            <option value="">Seleccionar un cargo</option>
+                            {Array.isArray(cargos) &&
+                                cargos.map((option) => (
+                                    <option key={option.cargo_id} value={option.cargo_id}>
+                                        {option.cargo_nombre}
+                                    </option>
+                                ))}
+                        </Form.Control>
+                    </Form.Group>
 
-                <Form.Group className="mb-3">
-                    <Form.Label>Seleccione el vehiculo:</Form.Label>
-                    <Form.Control as="select" value={vehiculoId} onChange={(e) => setVehiculoId(e.target.value)}>
-                        <option value="">Seleccionar una placa de vehiculo</option>
-                        {Array.isArray(vehiculos) &&
-                            vehiculos.map((option) => (
-                                <option key={option.vehiculo_id} value={option.vehiculo_id}>
-                                    {option.vehiculo_placa}
-                                </option>
-                            ))}
-                    </Form.Control>
-                </Form.Group>
-
-                {showError && <Alert variant="danger">Por favor, compconste todos los campos requeridos.</Alert>}
-                <Form.Group>
-                    <div className="text-center">
-                        <Button variant="primary" type="submit" style={{marginRight: '10px'}}>
-                            {empleado ? "Actualizar" : "Agregar"}
-                        </Button>
-                        <Button variant="secondary" onClick={handleFormCancel}>
-                            Cancelar
-                        </Button>
-                    </div>
-                </Form.Group>
-            </Form>
+                    <Form.Group className="mb-3">
+                        <Form.Label>Seleccione el vehiculo:</Form.Label>
+                        <Form.Control as="select" value={vehiculoId} onChange={(e) => setVehiculoId(e.target.value)}>
+                            <option value="">Seleccionar una placa de vehiculo</option>
+                            {Array.isArray(vehiculos) &&
+                                vehiculos.map((option) => (
+                                    <option key={option.vehiculo_id} value={option.vehiculo_id}>
+                                        {option.vehiculo_placa}
+                                    </option>
+                                ))}
+                        </Form.Control>
+                    </Form.Group>
+                    <Form.Group>
+                        <div className="text-center">
+                            <Button variant="primary" type="submit" style={{ marginRight: '10px' }}>
+                                {empleado ? "Actualizar" : "Agregar"}
+                            </Button>
+                            <Button variant="secondary" onClick={handleFormCancel}>
+                                Cancelar
+                            </Button>
+                        </div>
+                    </Form.Group>
+                </Form>
+            </Container>
         </Col>
     );
 }

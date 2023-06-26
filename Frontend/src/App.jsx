@@ -9,8 +9,8 @@ import {
   Route
 } from 'react-router-dom';
 import Empleado from './pages/empleados/Empleado';
-import Vehiculos from './pages/empleados/Vehiculos';
-import AgregarEmpleado from './pages/empleados/AgregarEmpleado';
+import AgregarEditarEmpleadoForm from './pages/empleados/form/AgregarEmpleado';
+import Cargos from './pages/cargos/Cargo';
 
 function App() {
   return (
@@ -22,8 +22,8 @@ function App() {
         <Route path="/register" element={<Register/>}/>
         <Route path="/parentesco" element={<Parentesco/>}/>
         <Route path="/empleados" element={<Empleado/>}/>
-        <Route path="/vehiculos" element={<Vehiculos/>}/>
-        <Route path='/agregar-empleado' element={<AgregarEmpleado/>}/>
+        <Route path='/agregar-empleado' element={<AgregarEditarEmpleadoForm/>}/>
+        <Route path='/cargos' element={<Cargos/>}/>
       </Routes>
     </BrowserRouter>
   );

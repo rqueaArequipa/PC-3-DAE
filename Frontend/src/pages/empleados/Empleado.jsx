@@ -1,22 +1,23 @@
 import React, { useEffect, useState } from "react";
 import Layout from "../../components/Layout";
 import './styleEmpleados.css'
-import TablaEmpleado from "./tablas/TablaEmpleado";
+import TablaEmpleado from "./table/TablaEmpleado";
 import axios from "axios";
 import { Row, Col, Container, Form, InputGroup, FormControl, Button } from 'react-bootstrap';
 import { Breadcrumb } from 'react-bootstrap';
-import AgregarEditarEmpleadoForm from "./AgregarEmpleado";
+import AgregarEditarEmpleadoForm from "./form/AgregarEmpleado";
 
 function Empleado() {
     const [empleados, setEmpleados] = useState([])
     const [searchTerm, setSearchTerm] = useState('');
     const [searchCriteria, setSearchCriteria] = useState('nombre');
     const [empleadoSeleccionado, setEmpleadoSeleccionado] = useState(null);
+    const apiUrlEmpleado = 'http://127.0.0.1:8000/api/empleado/'
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const responseEmpl = await axios.get('http://127.0.0.1:8000/api/empleado/')
+                const responseEmpl = await axios.get(apiUrlEmpleado)
                 setEmpleados(responseEmpl.data)
                 console.log(responseEmpl.data)
             } catch (error) {
@@ -25,7 +26,6 @@ function Empleado() {
         }
         fetchData()
     }, [])
-
 
     {/* Search por nombre, apellido, cargo, placa de vehiculo */}
     const handleSearchCriteriaChange = (e) => {setSearchCriteria(e.target.value);};
@@ -43,7 +43,7 @@ function Empleado() {
     function eliminarEmpleado(cod) {
         const rpta = window.confirm("desea eliminar");
         if (rpta) {
-            axios.delete('http://127.0.0.1:8000/api/empleado/' + cod)
+            axios.delete(apiUrlEmpleado + cod)
                 .then(response => {
                     var temp = empleados.filter((empleado) => empleado.empleado_id !== cod);
                     setEmpleados(temp);
@@ -62,7 +62,7 @@ function Empleado() {
     const actualizarEmpleado = (empleadoId, datos) => {
         if (empleadoId) {
             axios
-                .put(`http://127.0.0.1:8000/api/empleado/${empleadoId}/`, datos)
+                .put(`${apiUrlEmpleado} +${empleadoId}/`, datos)
                 .then((response) => {
                     const empleadoIndex = empleados.findIndex((empleado) => empleado.empleado_id === empleadoId);
                     const updatedEmpleados = [...empleados];
@@ -75,7 +75,7 @@ function Empleado() {
                 });
         } else {
             axios
-                .post("http://127.0.0.1:8000/api/empleado/", datos)
+                .post(apiUrlEmpleado, datos)
                 .then((response) => {
                     setEmpleados([...empleados, response.data]);
                     setEmpleadoSeleccionado(null);
